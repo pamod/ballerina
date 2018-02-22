@@ -38,17 +38,4 @@ function main (string[] args) {
     //Close the created connections.
     sourceChannel.closeCharacterChannel();
     destinationChannel.closeCharacterChannel();
-
-    //Read all characters in a file and write to the source file.
-    sourceChannel =
-    getFileCharacterChannel("./files/sample.txt", "r", "UTF-8");
-    destinationChannel =
-    getFileCharacterChannel("./files/sampleResponse2.txt", "w", "UTF-8");
-    io:println("Started to read all characters in file.");
-    string sourceContent = sourceChannel.readAllCharacters();
-    _ = destinationChannel.writeCharacters(sourceContent,0);
-    io:println("All characters are read and copied.");
-    //Close the created connections.
-    sourceChannel.closeCharacterChannel();
-    destinationChannel.closeCharacterChannel();
 }

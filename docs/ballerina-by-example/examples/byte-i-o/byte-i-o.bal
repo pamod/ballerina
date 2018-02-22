@@ -38,15 +38,6 @@ function copy (io:ByteChannel src, io:ByteChannel dst) {
     }
 }
 
-@Description{value:"This function will copy all content from source channel to a destination channel."}
-function copyAll (io:ByteChannel src, io:ByteChannel dst) {
-    blob readContent;
-    int numberOfBytesRead;
-    //Here's how we read all content from the source
-    readContent,numberOfBytesRead = src.readAllBytes();
-    int numberOfBytesWritten = dst.writeBytes(readContent, 0);
-}
-
 function main (string[] args) {
     //Read specified number of bytes from the given channel and write.
     string srcFilePath = "./files/ballerina.jpg";
@@ -55,16 +46,6 @@ function main (string[] args) {
     io:ByteChannel destinationChannel = getFileChannel(dstFilePath, "w");
     io:println("Start to copy files from " + srcFilePath + " to " + dstFilePath);
     copy(sourceChannel, destinationChannel);
-    io:println("File copy completed. The copied file could be located in " + dstFilePath);
-    //Close the created connections.
-    sourceChannel.close();
-    destinationChannel.close();
-    //Read all bytes from the given channel and write.
-    dstFilePath = "./files/ballerinaCopy2.jpg";
-    sourceChannel = getFileChannel(srcFilePath, "r");
-    destinationChannel = getFileChannel(dstFilePath, "w");
-    io:println("Start to copy files from " + srcFilePath + " to " + dstFilePath);
-    copyAll(sourceChannel, destinationChannel);
     io:println("File copy completed. The copied file could be located in " + dstFilePath);
     //Close the created connections.
     sourceChannel.close();
