@@ -55,6 +55,21 @@ public class TestUtil {
     }
 
     /**
+     * Opens a file for reading from absolute path.
+     *
+     * @param filePath the path the file should be opened for writing.
+     * @return the writable channel.
+     * @throws IOException during I/O error.
+     */
+    public static ByteChannel openFileFromPath(String filePath) throws IOException {
+        Set<OpenOption> opts = new HashSet<>();
+        opts.add(StandardOpenOption.READ);
+        Path path = Paths.get(filePath);
+        return Files.newByteChannel(path, opts);
+    }
+
+
+    /**
      * Opens a file for writing.
      *
      * @param filePath the path the file should be opened for writing.

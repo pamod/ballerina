@@ -44,6 +44,20 @@ public class DataChannel {
         do {
             channel.read(buffer);
         } while (buffer.hasRemaining());
+        buffer.flip();
+    }
+
+    /**
+     * Writes the given bytes to the channel.
+     *
+     * @param buffer the buffer which holds the content which should be written.
+     * @throws IOException during error
+     */
+    private void writeFull(ByteBuffer buffer) throws IOException {
+        buffer.flip();
+        do {
+            channel.write(buffer);
+        } while (buffer.hasRemaining());
     }
 
     /**
@@ -60,6 +74,18 @@ public class DataChannel {
     }
 
     /**
+     * Writes boolean value to the file.
+     *
+     * @param value value of the boolean.
+     */
+    public void writeBoolean(boolean value) throws IOException {
+        byte booleanValue = (value) ? (byte) 1 : 0;
+        ByteBuffer buffer = ByteBuffer.allocate(1);
+        buffer.put(booleanValue);
+        writeFull(buffer);
+    }
+
+    /**
      * Reads 4 input bytes and return the float value.
      *
      * @return the value of the float.
@@ -69,6 +95,18 @@ public class DataChannel {
         ByteBuffer content = ByteBuffer.allocate(4);
         readFull(content);
         return content.getFloat();
+    }
+
+    /**
+     * Writes the float value to the provided channel.
+     *
+     * @param value the float value which should be written to the channel.
+     * @throws IOException during I/O error.
+     */
+    public void writeFloat(float value) throws IOException {
+        ByteBuffer content = ByteBuffer.allocate(4);
+        content.putFloat(value);
+        writeFull(content);
     }
 
     /**
@@ -84,6 +122,17 @@ public class DataChannel {
     }
 
     /**
+     * Writes integer for the provided source.
+     *
+     * @param value the value of the integer which should be written.
+     */
+    public void  writeInteger(int value) throws IOException {
+        ByteBuffer content = ByteBuffer.allocate(4);
+        content.putInt(value);
+        writeFull(content);
+    }
+
+    /**
      * Reads a byte and return it's value.
      *
      * @return the byte which is read.
@@ -95,5 +144,10 @@ public class DataChannel {
         return content.get();
     }
 
+    public void writeByte(byte value) throws IOException {
+        ByteBuffer content = ByteBuffer.allocate(1);
+        content.put(value);
+        writeFull(content);
+    }
 
 }
