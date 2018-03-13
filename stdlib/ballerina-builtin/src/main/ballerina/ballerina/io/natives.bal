@@ -102,22 +102,22 @@ public native function createDelimitedRecordChannel (CharacterChannel channel, s
 
 @Description {value:"Function to read bytes"}
 @Param {value:"channel: The ByteChannel to read bytes from"}
-@Param {value:"numberOfBytes: Number of bytes which should be read"}
+@Param {value:"content: The byte array which will hold the content which is read"}
 @Param {value:"size: Maximum number of bytes which should be read to the array"}
 @Param {value:"offset: Position the bytes should be read from"}
 @Return {value:"The bytes which were read"}
 @Return {value:"Number of bytes read"}
 @Return {value:"Returns if there's any error while performaing I/O operation"}
-public native function <ByteChannel channel> read (int numberOfBytes, int size, int offset) (blob, int, IOError);
+public native function <ByteChannel channel> read (byte[] content, int size, int offset) (int, IOError);
 
 @Description {value:"Function to write bytes"}
 @Param {value:"channel: The ByteChannel to write bytes to"}
 @Param {value:"content: Bytes which should be written"}
-@Param {value:"numberOfBytes: Number of bytes which should be written to channel"}
-@Param {value:"startOffset: If the bytes need to be written with an offset, the value of that offset"}
+@Param {value:"size: Number of bytes which should be written to channel"}
+@Param {value:"offset: If the bytes need to be written with an offset, the value of that offset"}
 @Return {value:"Number of bytes written"}
 @Return {value:"Returns if there's any error while performaing I/O operation"}
-public native function <ByteChannel channel> write (blob content, int numberOfBytes, int startOffset) (int, IOError);
+public native function <ByteChannel channel> write (byte[] content, int size, int offset) (int, IOError);
 
 @Description {value:"Function to read characters"}
 @Param {value:"channel: The CharacterChannel to read characters from"}

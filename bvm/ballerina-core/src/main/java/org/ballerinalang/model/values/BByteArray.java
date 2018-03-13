@@ -54,6 +54,10 @@ public class BByteArray extends BNewArray {
         return values[(int) index];
     }
 
+    public byte[] getValues() {
+        return values;
+    }
+
     @Override
     public BType getType() {
         return arrayType;
